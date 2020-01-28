@@ -15,11 +15,16 @@ ToCamelCase("The_Stealth_Warrior"); // returns "TheStealthWarrior"
 package main
 import(
 	"unicode"
+	"regexp"
+	"strings"
+	
 )
 
 func main() {
 	new_word :=ToCamelCase("The_Stealth_Warrior")
+	new_word2 :=getCamel("The_Stealth_Warrior")
 	println(new_word)
+	println(new_word2)
 	
 	
 }
@@ -64,4 +69,16 @@ func ToCamelCase(s string) string  {
 }
 
 
+
+//---Second implementation
+func getCamel(s string) string{
+	re := regexp.MustCompile("_|-").Split(s,-1)
+
+	new_word :=re[0]
+	for _,v:= range re[1:] {
+		new_word +=strings.Title(v)
+	}
+
+	return new_word
+}
 
